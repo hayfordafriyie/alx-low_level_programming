@@ -1,39 +1,61 @@
-#include "main.h"
+#include <stdio.h>
 
 /**
- * _strstr - Locates a substring
- * @haystack: The string to be searched.
+ * _strlen - get len
+ * @c: pointer to buffer
  *
- * @needle: The substring to be located.
- * Return: If the substring is located - a pointer to the beginning
- * of the located substring
- * If the substring is not located - NULL.
+ * Description: get length of the string
+ *
+ * Return: int
  */
+int _strlen(char *c)
+{
+	int i = 0;
 
+	while (c[i] != '\0')
+		i++;
+
+	return (i);
+}
+
+/**
+ * _strstr - get substring
+ * @haystack: pointer to buffer
+ * @needle: pointer to chars to search for
+ *
+ * Description: search for the occurence of needle
+ * in haystack
+ *
+ * Return: pointer
+ */
 char *_strstr(char *haystack, char *needle)
 {
+	unsigned int i, j, track;
+	int nlen = _strlen(needle), hlen = _strlen(haystack);
 
-	int i;
-
-	if (*needle == 0)
+	if (nlen == 0)
 		return (haystack);
 
-	while (*haystack)
+	if (!(*needle) || !(*haystack) || (nlen > hlen) || (hlen == 0))
+		return (NULL);
+
+	for (i = 0, j = 0; *(haystack + i) != '\0' && *(needle + j) != '\0'; i++, j++)
 	{
-
-		i = 0;
-
-		if (haystack[i] == needle[i])
+		if (*(needle + j) == *(haystack + i))
 		{
-			do {
-				if (needle[i + 1] == '\0')
-					return (haystack);
-
-				i++;
-
-			} while (haystack[i] == needle[i]);
+			j++;
 		}
-		haystack++;
+		else
+		{
+			j = 0;
+			track = i + 1;
+		}
+
+		i++;
 	}
-	return ('\0');
+
+	if (*(needle + j) == '\0' && j != 0)
+		return ((haystack + track));
+
+	return (NULL);
 }

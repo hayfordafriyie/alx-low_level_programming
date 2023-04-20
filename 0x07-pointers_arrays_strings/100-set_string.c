@@ -1,13 +1,16 @@
-#include "main.h"
+#include <stdio.h>
 
 /**
- * set_string - Sets the value of a pointer to a char.
- * @s: The pointer.
- * @to: The char
+ * set_string - set
+ * @s: pointer to pointer
+ * @to: pointer to string
+ *
+ * Description: sum the diagonals of the matrix
+ * chars c in s
+ *
+ * Return: void
  */
-
 void set_string(char **s, char *to)
 {
 	*s = to;
 }
-

@@ -1,33 +1,60 @@
-#include "main.h"
 #include <stdio.h>
 
 /**
- * _strspn - function that gets the length of a prefix substring.
- * @s: string
- * @accept: string
- * Return: number of bytes in the initial segment of s
+ * _strchr - search
+ * @s: pointer to buffer
+ * @c: char to search for
+ *
+ * Description: search for char c in string
+ *
+ * Return: pointer to memory area
  */
-
-unsigned int _strspn(char *s, char *accept)
+char *_strchr(char *s, char c)
 {
-	unsigned int bytes = 0;
-	int i;
+	unsigned int i;
 
-	while (*s)
+	for (i = 0; *(s + i) != '\0'; i++)
 	{
-		for (i = 0; accept[i]; i++)
-		{
-			if (*s == accept[i])
-			{
-				bytes++;
-				break;
-			}
+		if (*(s + i) != c)
+			continue;
 
-			else if (accept[i + 1] == '\0')
-				return (bytes);
-		}
-		s++;
-
+		return (s + i);
 	}
-	return (bytes);
+
+	if (*(s + i) == c)
+		return (s + i);
+
+	return (NULL);
+}
+
+/**
+ * _strspn - get bytes
+ * @s: pointer to buffer
+ * @accept: pointer to chars to search for
+ *
+ * Description: search for and count accept
+ * chars c in s
+ *
+ * Return: unsigned int
+ */
+unsigned int  _strspn(char *s, char *accept)
+{
+	unsigned int i, count = 0;
+
+	if (!(*accept))
+		return (count);
+
+	for (i = 0; *(s + i) != '\0'; i++)
+	{
+		if (_strchr(accept, *(s + i)))
+		{
+			count++;
+			continue;
+		}
+
+		if (count)
+			break;
+	}
+
+	return (count);
 }

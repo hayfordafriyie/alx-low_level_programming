@@ -1,27 +1,51 @@
-#include "main.h"
 #include <stdio.h>
 
 /**
- * _strpbrk - function that searches a string for any of a set of bytes
- * @s: string
- * @accept: The prefix to be measured.
- * Return: a pointer to the byte in s that matches one of the bytes in accept,
- * or NULL if no such byte is found
+ * _strchr - search
+ * @s: pointer to buffer
+ * @c: char to search for
+ *
+ * Description: search for char c in string
+ *
+ * Return: pointer to memory area
  */
+char *_strchr(char *s, char c)
+{
+	unsigned int i;
 
+	for (i = 0; *(s + i) != '\0'; i++)
+	{
+		if (*(s + i) != c)
+			continue;
+
+		return (s + i);
+	}
+
+	if (*(s + i) == c)
+		return (s + i);
+
+	return (NULL);
+}
+
+/**
+ * _strpbrk - get bytes
+ * @s: pointer to buffer
+ * @accept: pointer to chars to search for
+ *
+ * Description: search for and count accept
+ * chars c in s
+ *
+ * Return: pointer
+ */
 char *_strpbrk(char *s, char *accept)
 {
-	int i;
+	unsigned int i;
 
-	while (*s)
+	for (i = 0; *(s + i) != '\0'; i++)
 	{
-		for (i = 0; accept[i]; i++)
-		{
-			if (*s == accept[i])
-
-				return (s);
-		}
-		s++;
+		if (_strchr(accept, *(s + i)))
+			return ((s + i));
 	}
-	return ('\0');
+
+	return (NULL);
 }
